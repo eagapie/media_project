@@ -1,0 +1,11 @@
+[
+    {
+        "model" :  "testdb.Testdb",
+        "pk" : 2,
+        "fields": {
+            "medi_id" : "321"
+            "url" : "test_url",
+            "name : "test name 2"
+        }
+    }
+]

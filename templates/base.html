@@ -1,0 +1,38 @@
+<html>
+<head>
+    <title>{% block title %} Mediacloud Articles {% endblock %}</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="{{STATIC_URL}}css/ui.jqgrid.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="{{STATIC_URL}}css/basic.css" />
+    <link rel="stylesheet" type="text/css" media="print, projection, screen" href="{{STATIC_URL}}css/tablesorter-blue.css" />
+
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/mediaproject.js"></script>
+
+</head>
+<body>
+</br>
+</br>
+
+<div style = "clear: left; float: left; text-align: left">
+    <a href="{% url index %}">Home</a>
+    <a href="{% url search_cat %}">Search by Category</a>
+</div>
+<br>
+
+{% block table_links %} {% endblock %}
+
+
+{% block content %} {% endblock %}
+<div id = "parent_media">
+{% block mediacloud %}  {% endblock %}
+</div>
+
+
+<div id="paren_wikileaks">
+{% block wikileaks %} {% endblock %}
+</div>
+</body>
+</html>
+
+

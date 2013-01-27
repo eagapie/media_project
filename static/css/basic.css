@@ -1,0 +1,106 @@
+/* Based on free CSS style "Internet Music" found here:
+
+http://coding.smashingmagazine.com/2008/12/01/100-free-high-quality-xhtmlcss-templates/
+   author: luka cvrk (www.solucija.com) */
+
+   
+/* default styles
+   -------------- */
+  
+body { 
+	font: Arial, Helvetica, sans-serif; 
+	line-height: 1.5em;
+	background: #fff; 
+	color: #454545; 
+}
+
+a {
+	color: #4A8EBC; 
+	background: inherit;
+}
+
+a:hover {
+	color: #C3593C;
+	background: inherit;	
+}
+
+a.title {
+	color: #FE6700;
+	background: #FFF;
+}
+
+h1 {
+	font: bold 2em "Trebuchet MS", Arial, Helvetica, sans-serif;
+	letter-spacing: -1px; 
+	padding: 2px 0 0 0px;
+	color: #464548;
+	background: inherit;
+}
+
+h1 a, h2 a {
+	text-decoration: none;
+	color: #464548;
+	background: inherit;
+}
+
+h1 a:hover, h2 a:hover {
+	color: #C3593C;
+	background: #FFF;
+}
+
+h1 .red{
+	color: #C3593C;
+	background: inherit;
+}
+
+
+h2 { 
+	padding: 0; 
+	font: bold 1.5em Arial, Helvetica, sans-serif;
+	letter-spacing: -1px;
+	color: #000; 
+	background: inherit;
+}
+
+h2 .yellow{
+	color: #FFFCD1;
+	background: inherit;
+}
+
+p {
+	font: Arial, Helvetica, sans-serif;
+}
+
+ul { 
+	list-style : none; 
+}
+
+form { 
+    text-align: center;    
+}
+
+
+/* layout
+   ------ */
+
+.content { 
+	margin: 10px auto;
+}
+
+
+/* footer
+   ------ */
+
+.footer { 
+	clear: both; 
+	text-align: center;
+	line-height: 1.8em;
+	color: #808080;
+	background: #FFF url(dot.gif) repeat-x;
+	padding: 8px 0;
+}
+
+.footer a {
+	color: #C3593C;
+	background: inherit;
+}

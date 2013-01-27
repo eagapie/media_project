@@ -1,0 +1,198 @@
+<!--
+generates the tables of results from wikileaks and mediacloud
+the structure is organized so that it can be used with jquery to selectively display information
+
+-->
+{% extends "base.html" %}
+
+
+{% block content %}{% endblock %}
+
+{% block table_links %}
+
+<u id="lk_mediacloud_results">Mediacloud</u>
+<u id="lk_wikileaks_sales">Leaks Sales</u>
+<u id= "lk_wikileaks_lobby_litigation">Leaks Litigation</u>
+<u id="lk_wikileaks_lobby_competitors">Leaks Competitors</u>
+<u id="lk_wikileaks_all_sales">Leaks All Sales</u>
+<u id="lk_wikileaks_all_litigation">Leaks All Litigation</u>
+<u id="lk_wikileaks_all_competitors">Leaks All Competitors</u>
+
+{% endblock %}
+
+
+{% block mediacloud %}
+
+
+<p>You searched for: <strong>{{ query }}</strong>, in media source: <strong> {{ category }} </strong> </p>
+<p> Click on the categories above to see the results. </p>
+
+{% if story_list %}
+        <div id="mediacloud_results" class="db_results">
+        <p> Found: {{ story_list|length }} articles </p>
+        <table id="story_list" class="tablesorter">
+            <thead>
+                <tr>
+                    <th>media</th>
+                    <th>title</th>
+                    <th>date</th>
+                </tr>
+            </thead>
+            <tbody>
+        {% for story in story_list %}
+                <tr>
+                    <td><a href="{% url detail_media story.media.media_id %}">{{ story.media.name }}</a></td>
+                    <td><a href="{% url detail_story story.story_id %}">{{ story.title }}</a></td>
+                    <td>{{ story.publish_date }}</td>
+        {% endfor %}
+            </tbody>
+        </table>
+        </div>
+
+{% else %}
+    <p>No Story data is available.</p>
+{% endif %}
+
+{% endblock %}
+
+{% block wikileaks %}
+{% if wikileaks_sales %}
+
+    <div id="wikileaks_sales" class="db_results">
+        <p>Found {{ wikileaks_sales|length }} wikileaks.</p>
+        <h3>Cables Labeled Firm Lobbying Ordered by Probability They Relate to Sales</h3>
+        <p><b>A bold subject prefixed and ended with *** implies users have labeled that cable particularly interesting.</b></p>
+        <p><b>Sales words: contract econchief econoff stakeholder stake equity advocacy dispute ambassador</b></p>
+        <table class="tablesorter">
+        <thead>
+            <tr>
+            <th>Date</th>
+            <th>Subject</th>
+            </tr>
+        </thead>
+        <tbody>    
+        {% for wikileaks_sales_withlobbying in wikileaks_sales_withlobbying %}
+        <tr>
+        <td>{{ wikileaks_sales_withlobbying.Time }}</td>
+        <td>{% if wikileaks_sales_withlobbying.Special %}<b>***{% endif %}<a href="/wikileaks/{{ wikileaks_sales_withlobbying.id }}/">{{ wikileaks_sales_withlobbying.Subject }}</a>{% if wikileaks_sales_withlobbying.Special %}***</b>{% endif %}</td>
+        </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+    <div id="wikileaks_lobby_litigation" class="db_results">
+        <br>
+        <h3>Cables Labeled Firm Lobbying Ordered by Probability They Relate to Litigation</h3>
+        <p><b>A bold subject prefixed and ended with *** implies users have labeled that cable particularly interesting.</b></p>
+        <p><b>Litigation words: litigation court judge ipr negotiate legal lawyers dispute</b></p>
+        <table class="tablesorter">
+        <thead>
+            <tr>
+            <th>Date</th>
+            <th>Subject</th>
+            </tr>
+        </thead>
+        <tbody>
+        </div>
+        {% for wikileaks_litigation_withlobbying in wikileaks_litigation_withlobbying %}
+        <tr>
+        <td>{{ wikileaks_litigation_withlobbying.Time }}</td>
+        <td>{% if wikileaks_litigation_withlobbying.Special %}<b>***{% endif %}<a href="/wikileaks/{{ wikileaks_litigation_withlobbying.id }}/">{{ wikileaks_litigation_withlobbying.Subject }}</a>{% if wikileaks_litigation_withlobbying.Special %}***</b>{% endif %}</td>
+        </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+    <br>
+    <div id="wikileaks_lobby_competitors" class="db_results">
+        <h3>Cables Labeled Firm Lobbying Ordered by Probability They Relate to Competitors</h3>
+        <p><b>A bold subject prefixed and ended with *** implies users have labeled that cable particularly interesting.</b></p>
+        <p><b>Competitor words: bid company price firm deal firms</b></p>
+        <table class="tablesorter">
+        <thead>
+            <tr>
+            <th>Date</th>
+            <th>Subject</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for wikileaks_competitor_withlobbying in wikileaks_competitor_withlobbying %}
+        <tr>
+        <td>{{ wikileaks_competitor_withlobbying.Time }}</td>
+        <td>{% if wikileaks_competitor_withlobbying.Special %}<b>***{% endif %}<a href="/wikileaks/{{ wikileaks_competitor_withlobbying.id }}/">{{ wikileaks_competitor_withlobbying.Subject }}</a>{% if wikileaks_competitor_withlobbying.Special %}***</b>{% endif %}</td>
+        </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+    <br>
+    <div id="wikileaks_all_sales" class="db_results">
+        <h3>All Firm's Cables Ordred by Probability They Relate to Sales</h3>
+        <p><b>A bold subject prefixed and ended with *** implies users have labeled that cable particularly interesting.</b></p>
+        <p><b>Sales words: contract econchief econoff stakeholder stake equity advocacy dispute ambassador</b></p>
+        <table class="tablesorter">
+        <thead>
+            <tr>
+            <th>Date</th>
+            <th>Subject</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for wikileaks_sales in wikileaks_sales %}
+        <tr>
+        <td>{{ wikileaks_sales.Time }}</td>
+        <td>{% if wikileaks_sales.Special %}<b>***{% endif %}<a href="/wikileaks/{{ wikileaks_sales.id }}/">{{ wikileaks_sales.Subject }}</a>{% if wikileaks_sales.Special %}***</b>{% endif %}</td>
+        </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+
+    <br>
+    <div id="wikileaks_all_litigation" class="db_results">
+        <h3>All Firm's Cables Ordered by Probability They Relate to Litigation</h3>
+        <p><b>A bold subject prefixed and ended with *** implies users have labeled that cable particularly interesting.</b></p>
+        <p><b>Litigation words: litigation court judge ipr negotiate legal lawyers dispute</b></p>
+        <table class="tablesorter">
+        <thead>
+            <tr>
+            <th>Date</th>
+            <th>Subject</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for wikileaks_litigation in wikileaks_litigation %}
+        <tr>
+        <td>{{ wikileaks_litigation.Time }}</td>
+        <td>{% if wikileaks_litigation.Special %}<b>***{% endif %}<a href="/wikileaks/{{ wikileaks_litigation.id }}/">{{ wikileaks_litigation.Subject }}</a>{% if wikileaks_litigation.Special %}***</b>{% endif %}</td>
+        </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+    <br>
+    <div id="wikileaks_all_competitors" class="db_results">
+        <h3>All Firm's Cables Ordered by Probability They Relate to Firm's Competitors</h3>
+        <p><b>A bold subject prefixed and ended with *** implies users have labeled that cable particularly interesting.</b></p>
+        <p><b>Competitor words: bid company price firm deal firms</b></p>
+        <table class="tablesorter">
+        <thead>
+            <tr>
+            <th>Date</th>
+            <th>Subject</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for wikileaks_competitor in wikileaks_competitor %}
+        <tr>
+        <td>{{ wikileaks_competitor.Time }}</td>
+        <td>{% if wikileaks_competitor.Special %}<b>***{% endif %}<a href="/wikileaks/{{ wikileaks_competitor.id }}/">{{ wikileaks_competitor.Subject }}</a>{% if wikileaks_competitor.Special %}***</b>{% endif %}</td>
+        </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+{% else %}
+    <p>No wikileaks matched your search criteria.</p>
+{% endif %}
+{% endblock %}
